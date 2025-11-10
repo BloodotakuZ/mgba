@@ -16,6 +16,7 @@ Features
 - Fast emulation. Known to run at full speed even on low end hardware, such as netbooks.
 - Qt and SDL ports for a heavy-weight and a light-weight frontend.
 - Local (same computer) link cable support.
+- Experimental GekkoNet rollback netcode frontend for wide-area multiplayer (optional build).
 - Save type detection, even for flash memory size[<sup>[2]</sup>](#flashdetect).
 - Support for cartridges with motion sensors and rumble (only usable with game controllers).
 - Real-time clock support, even without configuration.
