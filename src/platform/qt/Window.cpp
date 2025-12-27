@@ -732,7 +732,7 @@ void Window::showEvent(QShowEvent* event) {
 			}
 
 			if (m_config->getOption("muteOnMinimize").toInt()) {
-				m_inactiveMute = false;
+				m_minimizedMute = false;
 				updateMute();
 			}
 		}
@@ -781,7 +781,7 @@ void Window::hideEvent(QHideEvent* event) {
 		m_controller->setPaused(true);
 	}
 	if (m_config->getOption("muteOnMinimize").toInt()) {
-		m_inactiveMute = true;
+		m_minimizedMute = true;
 		updateMute();
 	}
 }
@@ -962,6 +962,9 @@ void Window::gameStarted() {
 
 void Window::gameStopped() {
 	for (auto& action : m_platformActions) {
+		action->setEnabled(true);
+	}
+	for (auto& action : m_nonMpActions) {
 		action->setEnabled(true);
 	}
 	for (auto& action : m_gameActions) {
@@ -2336,7 +2339,7 @@ void Window::updateMute() {
 		return;
 	}
 
-	bool mute = m_inactiveMute;
+	bool mute = m_inactiveMute || m_minimizedMute;
 
 	if (!mute) {
 		QString multiplayerAudio = m_config->getQtOption("multiplayerAudio").toString();
